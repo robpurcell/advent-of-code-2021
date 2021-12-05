@@ -37,7 +37,7 @@ fun countDepthIncreases(depths: List<Pair<Int, Int>>): Int {
     return count
 }
 
-private fun readInput(path: String = "/Users/rob/Development/source/github/advent-of-code-2021/src/test/resources/day01-input.txt"): List<Int> {
+private fun readInput(path: String = "/Users/rob/Development/source/advent-of-code-2021/src/test/resources/day01-input.txt"): List<Int> {
     val file = File(path)
     return file.readLines().map { it.toInt() }
 }
