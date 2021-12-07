@@ -42,4 +42,54 @@ internal class Day03Test {
         assertEquals(Pair(0, 2), processGivenIndex(input, 6))
         assertEquals(Pair(0, 2), processGivenIndex(input, 7))
     }
+
+    @Test
+    fun testCalculateOxygen() {
+        assertEquals("11000011", calculateOxygen(listOf("00110011", "11000011")))
+        assertEquals("00110011", calculateOxygen(listOf("00110011")))
+        assertEquals("11000011", calculateOxygen(listOf("00110011", "11000011", "10000011")))
+    }
+
+    @Test
+    fun testCalculateOxygenGeneratorRating() {
+        val input = listOf(
+            "00100",
+            "11110",
+            "10110",
+            "10111",
+            "10101",
+            "01111",
+            "00111",
+            "11100",
+            "10000",
+            "11001",
+            "00010",
+            "01010"
+        )
+
+        assertEquals(23, calculateOxygenGeneratorRating(input))
+    }
+
+    @Test
+    fun testCalculateCO2ScrubberRating() {
+        val input = listOf(
+            "00100",
+            "11110",
+            "10110",
+            "10111",
+            "10101",
+            "01111",
+            "00111",
+            "11100",
+            "10000",
+            "11001",
+            "00010",
+            "01010"
+        )
+
+        assertEquals(10, calculateCO2ScrubberRating(input))
+    }
+
+
+
 }
