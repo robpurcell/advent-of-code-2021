@@ -19,7 +19,7 @@ private fun createPairs(depths: List<Int>, pairsOfDepths: List<Pair<Int, Int>>, 
     return if (index >= depths.size - 1) {
         pairsOfDepths
     } else {
-        val newList = buildList() {
+        val newList = buildList {
             addAll(pairsOfDepths)
             add(Pair(depths[index], depths[index + 1]))
         }

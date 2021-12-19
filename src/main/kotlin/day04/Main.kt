@@ -7,9 +7,11 @@ fun main(args: Array<String>) {
     val numberInput = createGameNumbers(inputFile)
     val boards = createBoards(inputFile)
 
-    val (winningBoardNumber, lastNumberCalled) = playGame(numberInput, boards)
-    val answer = findScore(boards[winningBoardNumber], lastNumberCalled)
-    println("Part 1 answer: $answer")
+    val completionSequence = playGame(numberInput, boards)
+    val firstScore = completionSequence.first().third
+    println("Part 1 answer: $firstScore")
+    val lastScore = completionSequence.last().third
+    println("Part 2 answer: $lastScore")
 }
 
 typealias Board = List<MutableList<Pair<Int, Boolean>>>
@@ -39,16 +41,23 @@ fun createBoards(inputFile: File): MutableList<Board> {
     return boards
 }
 
-fun playGame(numbers: List<Int>, boards: List<Board>): Pair<Int, Int> {
+fun playGame(numbers: List<Int>, boards: List<Board>): List<Triple<Int, Int, Int>> {
+    val completionSequence = mutableListOf<Triple<Int, Int, Int>>()
     numbers.forEach { n ->
         boards.withIndex().forEach { (i, b) ->
             playNumber(n, b)
             if (testBoard(b)) {
-                return Pair(i, n)
+                if (!indexesInCompletionSequence(completionSequence).contains(i)) {
+                    completionSequence.add(Triple(i, n, findScore(b, n)))
+                }
             }
         }
     }
-    return Pair(0, 0)
+    return completionSequence
+}
+
+fun indexesInCompletionSequence(seq: List<Triple<Int, Int, Int>>): List<Int> {
+    return seq.map{ t -> t.first}
 }
 
 fun playNumber(number: Int, board: Board) {

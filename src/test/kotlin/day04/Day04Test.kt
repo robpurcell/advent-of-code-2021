@@ -48,6 +48,7 @@ internal class Day04Test {
         playNumber(13, board)
         println(board)
     }
+
     @Test
     fun testWin() {
         val boardDef = "13"
@@ -93,9 +94,27 @@ internal class Day04Test {
         val inputFile = File("/Users/rob/Development/source/advent-of-code-2021/src/test/resources/day04-sample.txt")
         val numberInput = createGameNumbers(inputFile)
         val boards = createBoards(inputFile)
+        val completionSequence = playGame(numberInput, boards)
+        val (winningBoardNumber, lastNumberCalled) = completionSequence[0]
 
-        assertEquals(Pair(2, 24), playGame(numberInput, boards))
-        assertEquals(4512, findScore(boards[2], 24))
+        assertEquals(2, winningBoardNumber)
+        assertEquals(24, lastNumberCalled)
+        assertEquals(4512, completionSequence.first().third)
+        assertEquals(1924, completionSequence.last().third)
+    }
+
+
+    @Test
+    fun testIndexesInSequence() {
+        val input = listOf(
+            Triple(11, 1, 1),
+            Triple(2, 1, 1),
+            Triple(45, 1, 1)
+        )
+
+        val expectedResult = listOf(11, 2, 45)
+
+        assertEquals(expectedResult, indexesInCompletionSequence(input))
     }
 
 }
